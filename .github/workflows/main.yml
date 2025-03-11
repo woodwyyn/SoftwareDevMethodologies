@@ -1,0 +1,32 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - src/**
+      - package.json
+      - package-lock.json
+      - *.json
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test --coverage --coverageProvider=v8
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - uses: codeclimate/codeclimate-action@v1
+        if: always()
+        with:
+          token: ${{ secrets.CODECLIMATE_API_TOKEN }}
+          coverage_command: npm test --coverage --coverageProvider=v8
+          fail_on_error: false
