@@ -10,6 +10,9 @@ on:
       - package.json
       - package-lock.json
       - '*.json'
+  pull_request:
+    paths:
+      - '!*.MD'
 
 jobs:
   build_and_test:
