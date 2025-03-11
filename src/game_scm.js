@@ -1,13 +1,7 @@
 import promptSync from 'prompt-sync';
+import info from './utils.js';
 
 const prompt = promptSync();
-
-function info() {
-  console.log('Welcome to the Brain Games!');
-  const name = prompt('May I have your name? ');
-  console.log(`Hello, ${name}!`);
-  return name;
-}
 
 function getRandomNumbers(count = 3, min = 1, max = 20) {
   const numbers = [];

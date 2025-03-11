@@ -6,10 +6,10 @@ on:
       - main
       - master
     paths:
-      - src/**
+      - src/*
       - package.json
       - package-lock.json
-      - *.json
+      - '*.json'
 
 jobs:
   build_and_test:
